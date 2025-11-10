@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\capa_entidad\capa_entidad.csproj" />
-    <ProjectReference Include="..\capa_negocio\capa_negocio.csproj" />
   </ItemGroup>
 
 </Project>

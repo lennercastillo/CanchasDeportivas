@@ -12,21 +12,21 @@ namespace capa_dato
     {
         CD_conexion conexion = new CD_conexion();
 
-        public List<CE_Canchas> Insertar()
+        public List<CE_Canchas> Listar()
         {
 
-            var InsertarCanchas = new List<CE_Canchas>();
+            var ListarCanchas = new List<CE_Canchas>();
 
             using (var conexionAbierta = conexion.abrir_conexion())
             {
-                using (var comando = new SqlCommand("SP_Canchas_Insert", conexionAbierta))
+                using (var comando = new SqlCommand("SP_Canchas_List", conexionAbierta))
                 {
                     comando.CommandType = System.Data.CommandType.StoredProcedure;
                     using (var lector = comando.ExecuteReader())
                     {
                         while (lector.Read())
                         {
-                            InsertarCanchas.Add(new CE_Canchas
+                            ListarCanchas.Add(new CE_Canchas
                             {
                                 IdCancha = Convert.ToInt32(lector["IdCancha"]),
                                 Nombre = lector["Nombre"].ToString(),
@@ -37,8 +37,8 @@ namespace capa_dato
                         }
                     }
                 }
-                conexion.cerrar_conexion();
-                return InsertarCanchas;
+                
+                return ListarCanchas;
 
             }
 
@@ -61,7 +61,7 @@ namespace capa_dato
                     comando.Parameters.AddWithValue("@Estado", cE_Canchas.Estado);
                     comando.ExecuteNonQuery();
                 }
-                conexion.cerrar_conexion();
+                
             }
         }
 
@@ -76,7 +76,7 @@ namespace capa_dato
                     comando.Parameters.AddWithValue("@IdCancha", cE_Canchas.IdCancha);
                     comando.ExecuteNonQuery();
                 }
-                conexion.cerrar_conexion();
+                
             }
 
         }
@@ -94,7 +94,7 @@ namespace capa_dato
                     comando.Parameters.AddWithValue("@Estado", cE_Canchas.Estado);
                     comando.ExecuteNonQuery();
                 }
-                conexion.cerrar_conexion();
+                
             }
         }
 
@@ -109,7 +109,7 @@ namespace capa_dato
                     comando.Parameters.AddWithValue("@IdCancha", cE_Canchas.IdCancha);
                     comando.ExecuteNonQuery();
                 }
-                conexion.cerrar_conexion();
+                
             }
 
         }
