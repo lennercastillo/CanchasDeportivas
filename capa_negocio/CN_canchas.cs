@@ -14,8 +14,7 @@ namespace capa_negocio
         // 1. Método para Listar todas las canchas
         public List<CE_Canchas> ListarCanchas()
         {
-            // **Regla de Negocio Opcional:** // Podrías aplicar filtros o transformaciones aquí antes de devolver la lista
-            // Por ejemplo: oCD_Canchas.Listar().Where(c => c.Estado == "Disponible").ToList();
+            
 
             try
             {
@@ -78,7 +77,7 @@ namespace capa_negocio
             }
         }
 
-        // 4. Método para Eliminar una cancha
+        
         public void Eliminar(CE_Canchas cancha)
         {
             // **Regla de Negocio:** // ------------------------------------

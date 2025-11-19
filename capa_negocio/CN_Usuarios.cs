@@ -121,16 +121,6 @@ namespace capa_negocio
             }
         }
 
-        // ** NOTA ADICIONAL: Implementación de Login (Autenticación) **
-        /* public CE_usuarios Autenticar(string nombreUsuario, string clave)
-        {
-            // 1. Validaciones básicas (no vacíos)
-            // 2. Llamar a CD_Usuarios.BuscarPorNombre(nombreUsuario)
-            // 3. Verificar si se encontró el usuario.
-            // 4. Comparar la 'clave' proporcionada con la 'clave hasheada' almacenada en la DB.
-            // 5. Devolver el objeto CE_usuarios o lanzar una excepción de credenciales inválidas.
-            // return usuarioEncontrado;
-        }
-        */
+        
     }
 }

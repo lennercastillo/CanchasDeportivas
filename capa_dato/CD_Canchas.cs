@@ -98,21 +98,7 @@ namespace capa_dato
             }
         }
 
-        public void ListarCancha(CE_Canchas cE_Canchas)
-        {
-
-            using (var conexionAbierta = conexion.abrir_conexion())
-            {
-                using (var comando = new SqlCommand("SP_Canchas_List", conexionAbierta))
-                {
-                    comando.CommandType = System.Data.CommandType.StoredProcedure;
-                    comando.Parameters.AddWithValue("@IdCancha", cE_Canchas.IdCancha);
-                    comando.ExecuteNonQuery();
-                }
-                
-            }
-
-        }
+        
     }
 }
 

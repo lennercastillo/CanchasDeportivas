@@ -7,7 +7,7 @@ using capa_entidad;
 
 namespace capa_dato
 {
-    internal class CD_Clientes_cs
+    public class CD_Clientes
     {
 
         CD_conexion conexion = new CD_conexion();

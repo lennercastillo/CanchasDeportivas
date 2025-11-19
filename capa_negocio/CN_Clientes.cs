@@ -1,25 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-// Incluye los namespaces de tus otras capas
 using capa_entidad;
 using capa_dato;
+using System.Text;
+using System.Threading.Tasks;
+using capa_dato;
+using capa_entidad;
+using System.Text.RegularExpressions;
 
 namespace capa_negocio
 {
     public class CN_Clientes
     {
-        // Instancia de la Capa de Datos para poder ejecutar las operaciones SQL
-        private CD_Clientes_cs oCD_Clientes = new CD_Clientes_cs();
+        
+        private CD_Clientes oCD_Clientes = new CD_Clientes();
 
-        // 1. Listar Clientes
-        // Solo llama a la Capa de Datos, ya que el listado generalmente no requiere lógica de negocio compleja.
+
         public List<CE_Clientes> Listar()
         {
             try
             {
                 // Llama al método de la Capa de Datos
-                return oCD_Clientes.Listar();
+                return oCD_Clientes.ListarClientes();
             }
             catch (Exception ex)
             {
@@ -50,7 +53,7 @@ namespace capa_negocio
 
             try
             {
-                oCD_Clientes.Insertar(cliente);
+                oCD_Clientes.InsertarClientes(cliente);
             }
             catch (Exception ex)
             {
@@ -76,7 +79,7 @@ namespace capa_negocio
 
             try
             {
-                oCD_Clientes.Actualizar(cliente);
+                oCD_Clientes.ActualizarClientes(cliente);
             }
             catch (Exception ex)
             {
@@ -101,7 +104,7 @@ namespace capa_negocio
 
             try
             {
-                oCD_Clientes.Eliminar(IdCliente);
+                oCD_Clientes.EliminarClientes(IdCliente);
             }
             catch (Exception ex)
             {

@@ -7,7 +7,7 @@ using Microsoft.Data.SqlClient;
 
 namespace capa_dato
 {
-    internal class CD_conexion
+    public class CD_conexion
     {
 
         private readonly SqlConnection conexion = new SqlConnection("Data Source=DESKTOP-ACAM5N1;Initial Catalog=DB_canchasdeportivas;Integrated Security=True;Trust Server Certificate=True");
