@@ -1,0 +1,77 @@
+﻿@model capa_entidad.CE_Reservas
+@{
+    ViewData["Title"] = "Actualizar Reserva";
+}
+
+<h1>Actualizar Reserva</h1>
+
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Actualizar" method="post" class="container border p-4 rounded shadow-sm bg-light">
+
+            <input type="hidden" asp-for="IdReserva" />
+
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label asp-for="IdCancha" class="form-label">ID Cancha</label>
+                    <input asp-for="IdCancha" type="number" class="form-control" />
+                    <span asp-validation-for="IdCancha" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label asp-for="IdCliente" class="form-label">ID Cliente</label>
+                    <input asp-for="IdCliente" type="number" class="form-control" />
+                    <span asp-validation-for="IdCliente" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label asp-for="IdUsuario" class="form-label">ID Usuario</label>
+                    <input asp-for="IdUsuario" type="number" class="form-control" />
+                    <span asp-validation-for="IdUsuario" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label asp-for="FechaReserva" class="form-label">Fecha</label>
+                    <input asp-for="FechaReserva" type="date" class="form-control" asp-format="{0:yyyy-MM-dd}" />
+                    <span asp-validation-for="FechaReserva" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label asp-for="HoraInicio" class="form-label">Hora Inicio</label>
+                    <input asp-for="HoraInicio" type="time" class="form-control" />
+                    <span asp-validation-for="HoraInicio" class="text-danger"></span>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label asp-for="HoraFin" class="form-label">Hora Fin</label>
+                    <input asp-for="HoraFin" type="time" class="form-control" />
+                    <span asp-validation-for="HoraFin" class="text-danger"></span>
+                </div>
+            </div>
+
+            <section class="mb-3">
+                <label asp-for="NombreCliente" class="form-label">Nombre Referencia</label>
+                <input asp-for="NombreCliente" class="form-control" />
+                <span asp-validation-for="NombreCliente" class="text-danger"></span>
+            </section>
+
+            <section class="mb-3">
+                <label asp-for="Comentario" class="form-label">Comentarios</label>
+                <textarea asp-for="Comentario" class="form-control" rows="2"></textarea>
+                <span asp-validation-for="Comentario" class="text-danger"></span>
+            </section>
+
+            <div class="mb-3 form-check">
+                <input class="form-check-input" type="checkbox" asp-for="Estado" id="checkEstado">
+                <label class="form-check-label" for="checkEstado">
+                    Reserva Activa
+                </label>
+                <span asp-validation-for="Estado" class="text-danger"></span>
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a asp-action="ListarReservas" class="btn btn-secondary me-md-2">Cancelar</a>
+                <button type="submit" class="btn btn-warning">Guardar Cambios</button>
+            </div>
+
+        </form>
+    </div>
+</div>

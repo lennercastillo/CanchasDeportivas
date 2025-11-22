@@ -1,0 +1,53 @@
+﻿@model List<capa_entidad.CE_Reservas>
+@{
+    ViewData["Title"] = "ListarReservas";
+}
+
+<h1>Lista de clientes</h1>
+
+<a asp-action="InsertarReservas" class="btn btn-success mb-3">Agregar Nueva Reserva</a>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>IdReserva</th>
+            <th>IdCancha</th>
+            <th>IdCliente</th>
+            <th>IdUsuario</th>
+            <th>FechaReserva</th>
+            <th>HoraInicio</th>
+            <th>HoraFin</th>
+            <th>NombreCliente</th>
+            <th>Comentario</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var reserva in Model)
+        {
+            <tr>
+                <td>@reserva.IdReserva</td>
+                <td>@reserva.IdCancha</td>
+                <td>@reserva.IdCliente</td>
+                <td>@reserva.IdUsuario</td>
+                <td>@reserva.FechaReserva</td>
+                <td>@reserva.HoraInicio</td>
+                <td>@reserva.HoraFin</td>
+                <td>@reserva.NombreCliente</td>
+                <td>@reserva.Comentario</td>
+                <td>@reserva.Estado</td>
+                <th>
+                    <a asp-action="Actualizar" asp-route-id="@reserva.IdReserva" class="btn btn-primary">Editar</a>
+                    <form asp-action="Eliminar" method="post" asp-route-id="@reserva.IdReserva">
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este cliente?');">Eliminar</button>
+                    </form>
+
+
+                </th>
+            </tr>
+        }
+    </tbody>
+</table>
+

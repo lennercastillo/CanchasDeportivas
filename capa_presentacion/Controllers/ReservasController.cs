@@ -5,13 +5,13 @@ using capa_entidad;
 
 namespace capa_presentacion.Controllers
 {
-    public class ClientesController : Controller
+    public class ReservasController : Controller
 
     {
 
-        CN_Clientes Clientes = new CN_Clientes();
+       CN_Reservas Reservas = new CN_Reservas();
 
-        public ActionResult ListarClientes()
+        public ActionResult ListarReservas()
         {
             try
             {
@@ -19,13 +19,13 @@ namespace capa_presentacion.Controllers
                 {
                     throw new Exception("El estado del modelo no es válido.");
                 }
-                var olista = Clientes.Listar();
+                var olista = Reservas.Listar();
                 return View(olista);
             }
             catch (Exception ex)
             {
-                TempData["ErrorMessage"] = "Error al obtener la lista de clientes: " + ex.Message;
-                return View(new List<CE_Clientes>());
+                TempData["ErrorMessage"] = "Error al obtener la lista de reservas: " + ex.Message;
+                return View(new List<CE_Reservas>());
             }
 
 
@@ -36,14 +36,14 @@ namespace capa_presentacion.Controllers
 
         }
 
-        public ActionResult InsertarCliente()
+        public ActionResult InsertarReservas()
         {
             return View();
         }
 
         [HttpPost]
 
-        public ActionResult InsertarClientes(CE_Clientes cliente)
+        public ActionResult InsertarReservas(CE_Reservas reservas)
         {
             try
             {
@@ -51,12 +51,12 @@ namespace capa_presentacion.Controllers
                 {
                     return StatusCode(404, $"No se encontro el modelo");
                 }
-                Clientes.Insertar(cliente);
-                return RedirectToAction("ListarClientes");
+                Reservas.InsertarReservas(reservas);
+                return RedirectToAction("ListarReservas");
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Error al agregar el cliente: {ex.Message}");
+                return StatusCode(500, $"Error al agregar la reserva: {ex.Message}");
             }
 
 
@@ -64,31 +64,31 @@ namespace capa_presentacion.Controllers
 
         [HttpGet]
 
-     
+
 
         public ActionResult Actualizar(int id)
         {
-           var oCliente = Clientes.Listar();
-           var cliente = oCliente.FirstOrDefault(c => c.IdCliente == id);
+            var oReserva = Reservas.Listar();
+            var reserva = oReserva.FirstOrDefault(c => c.IdReserva == id);
 
-            if (cliente == null)
+            if (reserva == null)
             {
                 return NotFound($"No se pudo actualizar el cliente con el id: {id}");
             }
-            return View(cliente);
+            return View(reserva);
         }
 
-        public ActionResult Actualizar(CE_Clientes clientes)
+        public ActionResult Actualizar(CE_Reservas reservas)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    Clientes.Actualizar(clientes);
-                    return RedirectToAction("ListarClientes");
+                    Reservas.Actualizar(reservas);
+                    return RedirectToAction("ListarReservas");
                 }
-                Clientes.Actualizar(clientes);
-                return RedirectToAction("ListarClientes");
+                Reservas.Actualizar(reservas);
+                return RedirectToAction("ListarReservas");
 
 
 
@@ -106,12 +106,16 @@ namespace capa_presentacion.Controllers
         {
             try
             {
-                Clientes.Eliminar(id);
-                return RedirectToAction("ListarClientes");
+                Reservas.Eliminar(id);
+
+
+
+
+                return RedirectToAction("ListarReservas");
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Error al eliminar el cliente: {ex.Message}");
+                return StatusCode(500, $"Error al eliminar la reserva: {ex.Message}");
             }
         }
 

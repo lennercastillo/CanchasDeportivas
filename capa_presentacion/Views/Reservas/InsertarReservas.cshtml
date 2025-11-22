@@ -1,0 +1,101 @@
+﻿@model capa_entidad.CE_Reservas
+@{
+    ViewData["Title"] = "AgregarReserva";
+}
+
+<h1>Agregar nueva reserva</h1>
+
+<form action="InsertarReservas" method="post" class="container">
+
+    <section class="mb-3">
+        <label asp-for="IdCancha" class="form-label"></label>
+        <input asp-for="IdCancha" class="form-control" />
+        <span asp-validation-for="IdCancha" class="text-danger"></span>
+
+    </section>
+    <section class="mb-3">
+        <label asp-for="IdCliente" class="form-label"></label>
+        <input asp-for="IdCliente" class="form-control" />
+        <span asp-validation-for="IdCliente" class="text-danger"></span>
+
+    </section>
+    <section class="mb-3">
+        <label asp-for="IdUsuario" class="form-label"></label>
+        <input asp-for="IdUsuario" class="form-control" />
+        <span asp-validation-for="IdUsuario" class="text-danger"></span>
+
+    </section>
+    <section class="mb-3">
+        <label asp-for="FechaReserva" class="form-label"></label>
+        <input type="datetime-local" asp-for="FechaReserva" class="form-control" />
+        <span asp-validation-for="FechaReserva" class="text-danger"></span>
+
+    </section>
+    <section class="mb-3">
+        <label asp-for="HoraInicio" class="form-label"></label>
+        <input type="time" asp-for="HoraInicio" class="form-control" />
+        <span asp-validation-for="HoraInicio" class="text-danger"></span>
+
+    </section>
+    <section class="mb-3">
+        <label asp-for="HoraFin" class="form-label"></label>
+        <input type="time" asp-for="HoraFin" class="form-control" />
+        <span asp-validation-for="HoraFin" class="text-danger"></span>
+
+    </section>
+    <section class="mb-3">
+        <label asp-for="NombreCliente" class="form-label"></label>
+        <input asp-for="NombreCliente" class="form-control" />
+        <span asp-validation-for="NombreCliente" class="text-danger"></span>
+
+    </section>
+    <section class="mb-3">
+        <label asp-for="Comentario" class="form-label"></label>
+        <input asp-for="Comentario" class="form-control" />
+        <span asp-validation-for="Comentario" class="text-danger"></span>
+
+    </section>
+
+    <div>
+        <section class="mb-3">
+            <label asp-for="Estado" class="col-form-label"></label>
+            <input asp-for="Estado" class="form-check-input" />
+            <span asp-validation-for="Estado" class="text-danger"></span>
+        </section>
+    </div>
+
+
+
+
+    <button type="submit" class="btn btn-primary">Agregar</button>
+    <a asp-action="ListarClientes" class="btn btn-secondary">Cancelar</a>
+
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

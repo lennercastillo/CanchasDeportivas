@@ -1,0 +1,43 @@
+﻿@model List<capa_entidad.CE_Clientes>
+@{
+    ViewData["Title"] = "ListarClientes";
+}
+
+<h1>Lista de clientes</h1>
+
+<a asp-action="InsertarCliente" class="btn btn-success mb-3">Agregar Nuevo Cliente</a>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Telefono</th>
+            <th>Correo</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var cliente in Model)
+        {
+            <tr>
+                <td>@cliente.IdCliente</td>
+                <td>@cliente.Nombre</td>
+                <td>@cliente.Telefono</td>
+                <td>@cliente.Correo</td>
+                <td>@cliente.Estado</td>
+                <th>
+                    <a asp-action="Actualizar" asp-route-id="@cliente.IdCliente" class="btn btn-primary">Editar</a>
+                    <form asp-action="Eliminar" method="post" asp-route-id="@cliente.IdCliente">
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este cliente?');">Eliminar</button>
+                    </form>
+
+
+                </th>
+            </tr>
+        }
+    </tbody>
+</table>
+

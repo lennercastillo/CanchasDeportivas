@@ -1,0 +1,41 @@
+﻿@model capa_entidad.CE_Canchas
+@{
+    ViewData["Title"] = "AgregarCancha";
+}
+
+<h1>Insertar nueva cancha</h1>
+
+<form action="AgregarCancha" method="post" class="container">
+
+    <section class="mb-3">
+        <label asp-for="Nombre" class="form-label"></label>
+        <input asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </section>
+    <section class="mb-3">
+		<label asp-for="Tipo" class="form-label>"></label>
+		<input asp-for="Tipo" class="form-control" />
+        <span asp-validation-for="Tipo" class="text-danger"></span>
+        </section>
+    <section class="mb-3">
+        <label asp-for="PrecioPorHora" class="form-label"></label>
+        <input asp-for="PrecioPorHora" class="form-control" />
+		<span asp-validation-for="PrecioPorHora" class="text-danger"></span>
+    </section>
+    <section class="mb-3">
+        <label asp-for="Estado" class="form-label"></label>
+		<input asp-for="Estado" class="form-control" />
+        <span asp-validation-for="Estado" class="text-danger"></span>
+    </section>
+
+    <button type="submit" class="btn btn-primary">Agregar</button>
+	<a asp-action="ListarCanchas" class="btn btn-secondary">Cancelar</a>
+        
+
+
+    
+
+</form>
+
+
+

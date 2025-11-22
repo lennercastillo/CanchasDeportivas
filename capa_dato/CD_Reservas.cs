@@ -13,7 +13,7 @@ namespace capa_dato
 
         CD_conexion conexion = new CD_conexion();
 
-        public List<CE_Reservas> Insertar()
+        public List<CE_Reservas> Listar()
         {
             var ListarReserva = new List<CE_Reservas>();
 
@@ -35,6 +35,7 @@ namespace capa_dato
                                 FechaReserva = Convert.ToDateTime(lector["FechaReserva"]),
                                 HoraInicio = (TimeSpan)(lector["HoraInicio"]),
                                 HoraFin = (TimeSpan)(lector["HoraFin"]),
+                                NombreCliente = lector["NombreCliente"].ToString(),
                                 Comentario = lector["Comentario"].ToString(),
                                 Estado = Convert.ToBoolean(lector["Estado"])
 
@@ -65,7 +66,10 @@ namespace capa_dato
                     comando.Parameters.AddWithValue("@FechaReserva", cE_Reservas.FechaReserva);
                     comando.Parameters.AddWithValue("@HoraInicio", cE_Reservas.HoraInicio);
                     comando.Parameters.AddWithValue("@HoraFin", cE_Reservas.HoraFin);
+                    comando.Parameters.AddWithValue("@NombreCliente", cE_Reservas.NombreCliente);
                     comando.Parameters.AddWithValue("@Comentario", cE_Reservas.Comentario);
+                    comando.Parameters.AddWithValue("@Estado", cE_Reservas.Estado);
+                    
 
 
 
@@ -76,7 +80,7 @@ namespace capa_dato
 
                     comando.ExecuteNonQuery();
                 }
-                conexion.cerrar_conexion();
+                
 
             }
 
@@ -96,25 +100,26 @@ namespace capa_dato
                     comando.Parameters.AddWithValue("@FechaReserva", cE_Reservas.FechaReserva);
                     comando.Parameters.AddWithValue("@HoraInicio", cE_Reservas.HoraInicio);
                     comando.Parameters.AddWithValue("@HoraFin", cE_Reservas.HoraFin);
+                    comando.Parameters.AddWithValue("NombreCliente", cE_Reservas.NombreCliente);
                     comando.Parameters.AddWithValue("@Comentario", cE_Reservas.Comentario);
                     comando.Parameters.AddWithValue("@Estado", cE_Reservas.Estado);
                     comando.ExecuteNonQuery();
                 }
-                conexion.cerrar_conexion();
+                
             }
         }
 
-        public void EliminarReserva(CE_Reservas cE_Reservas)
+        public void EliminarReserva(int id)
         {
             using (var conexionAbierta = conexion.abrir_conexion())
             {
                 using (var comando = new SqlCommand("SP_Reservas_Delete", conexionAbierta))
                 {
                     comando.CommandType = System.Data.CommandType.StoredProcedure;
-                    comando.Parameters.AddWithValue("@IdReserva", cE_Reservas.IdReserva);
+                    comando.Parameters.AddWithValue("@Id", id);
                     comando.ExecuteNonQuery();
                 }
-                conexion.cerrar_conexion();
+                
             }
         }
 

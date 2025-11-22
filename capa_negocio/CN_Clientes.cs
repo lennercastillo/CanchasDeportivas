@@ -14,102 +14,31 @@ namespace capa_negocio
     public class CN_Clientes
     {
         
-        private CD_Clientes oCD_Clientes = new CD_Clientes();
+        CD_Clientes oCD_Clientes = new CD_Clientes();
 
 
         public List<CE_Clientes> Listar()
         {
-            try
-            {
-                // Llama al método de la Capa de Datos
-                return oCD_Clientes.ListarClientes();
-            }
-            catch (Exception ex)
-            {
-                // Manejo de errores: en un proyecto real, se registraría el error.
-                throw new Exception("Error en la Capa de Negocio al listar clientes: " + ex.Message);
-            }
+           oCD_Clientes = new CD_Clientes();
+           return oCD_Clientes.ListarClientes();
         }
 
         // 2. Insertar Nuevo Cliente
         public void Insertar(CE_Clientes cliente)
         {
-            // ** LÓGICA DE NEGOCIO Y VALIDACIONES **
-            // ------------------------------------------------------------------
-            if (string.IsNullOrWhiteSpace(cliente.Nombre))
-            {
-                throw new ArgumentException("El nombre del cliente no puede estar vacío.");
-            }
-
-            if (string.IsNullOrWhiteSpace(cliente.Correo) || !cliente.Correo.Contains("@"))
-            {
-                throw new ArgumentException("Debe proporcionar un correo electrónico válido.");
-            }
-
-            // Aquí se podría añadir validación para:
-            // - Formato de teléfono (usando RegEx).
-            // - Verificación de que el correo no exista ya en la base de datos (con una consulta adicional).
-            // ------------------------------------------------------------------
-
-            try
-            {
-                oCD_Clientes.InsertarClientes(cliente);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error en la Capa de Negocio al insertar cliente: " + ex.Message);
-            }
+            oCD_Clientes.InsertarClientes(cliente);
         }
 
         // 3. Actualizar Cliente
         public void Actualizar(CE_Clientes cliente)
         {
-            // ** LÓGICA DE NEGOCIO Y VALIDACIONES **
-            // ------------------------------------------------------------------
-            if (cliente.IdCliente <= 0)
-            {
-                throw new ArgumentException("Se requiere un Id de Cliente válido para actualizar.");
-            }
-
-            if (string.IsNullOrWhiteSpace(cliente.Telefono))
-            {
-                throw new ArgumentException("El campo Teléfono no puede estar vacío.");
-            }
-            // ------------------------------------------------------------------
-
-            try
-            {
-                oCD_Clientes.ActualizarClientes(cliente);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error en la Capa de Negocio al actualizar cliente: " + ex.Message);
-            }
+            oCD_Clientes.ActualizarClientes(cliente);
         }
 
         // 4. Eliminar Cliente
-        public void Eliminar(int IdCliente)
+        public void Eliminar(int id)
         {
-            // ** LÓGICA DE NEGOCIO Y VALIDACIONES **
-            // ------------------------------------------------------------------
-            if (IdCliente <= 0)
-            {
-                throw new ArgumentException("Se requiere un Id de Cliente para eliminar.");
-            }
-
-            // Aquí se podría añadir una validación crítica:
-            // - Verificar si el cliente tiene reservas o transacciones pendientes. 
-            //   Si las tiene, se podría lanzar una excepción para evitar la eliminación.
-            // ------------------------------------------------------------------
-
-            try
-            {
-                oCD_Clientes.EliminarClientes(IdCliente);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error en la Capa de Negocio al eliminar cliente: " + ex.Message);
-            }
+            oCD_Clientes.EliminarClientes(id);
         }
     }
 }

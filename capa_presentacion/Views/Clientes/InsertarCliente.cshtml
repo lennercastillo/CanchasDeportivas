@@ -1,0 +1,71 @@
+﻿@model capa_entidad.CE_Clientes
+@{
+    ViewData["Title"] = "AgregarCliente";
+}
+
+<h1>Agregar nuevo Cliente</h1>
+
+<form action="InsertarClientes" method="post" class="container">
+
+    <section class="mb-3">
+        <label asp-for="Nombre" class="form-label"></label>
+        <input asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+
+    </section>
+    <section class="mb-3">
+        <label asp-for="Telefono" class="form-label"></label>
+        <input asp-for="Telefono" class="form-control" />
+        <span asp-validation-for="Telefono" class="text-danger"></span>
+
+    </section>
+    <section class="mb-3">
+        <label asp-for="Correo" class="form-label"></label>
+        <input asp-for="Correo" class="form-control" />
+        <span asp-validation-for="Correo" class="text-danger"></span>
+
+    </section>
+
+    <div>
+        <section class="mb-3">
+            <label asp-for="Estado" class="col-form-label"></label>
+            <input asp-for="Estado" class="col-form-label" />
+            <span asp-validation-for="Estado" class="text-danger"></span>
+        </section>
+    </div>
+
+
+
+
+    <button type="submit" class="btn btn-primary">Agregar</button>
+    <a asp-action="ListarClientes" class="btn btn-secondary">Cancelar</a>
+
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

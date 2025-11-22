@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using capa_entidad;
+using Microsoft.Data.SqlClient;
 
 namespace capa_dato
 {
@@ -35,7 +36,7 @@ namespace capa_dato
                         }
                     }
                 }
-                conexion.cerrar_conexion();
+                
                 return ListarClientes;
             }
 
@@ -47,8 +48,9 @@ namespace capa_dato
         {
             using (var conexionAbierta = conexion.abrir_conexion())
             {
-                using (var comando = new Microsoft.Data.SqlClient.SqlCommand("SP_Clientes_Insert", conexionAbierta))
+                using (var comando = new SqlCommand("SP_Clientes_Insert", conexionAbierta))
                 {
+
                     comando.CommandType = System.Data.CommandType.StoredProcedure;
                     comando.Parameters.AddWithValue("@Nombre", cE_Clientes.Nombre);
                     comando.Parameters.AddWithValue("@Telefono", cE_Clientes.Telefono);
@@ -56,7 +58,7 @@ namespace capa_dato
                     comando.Parameters.AddWithValue("@Estado", cE_Clientes.Estado);
                     comando.ExecuteNonQuery();
                 }
-                conexion.cerrar_conexion();
+                
             }
         }
 
@@ -64,7 +66,7 @@ namespace capa_dato
         {
             using (var conexionAbierta = conexion.abrir_conexion())
             {
-                using (var comando = new Microsoft.Data.SqlClient.SqlCommand("SP_Clientes_Update", conexionAbierta))
+                using (var comando = new SqlCommand("SP_Clientes_Update", conexionAbierta))
                 {
                     comando.CommandType = System.Data.CommandType.StoredProcedure;
                     comando.Parameters.AddWithValue("@IdCliente", cE_Clientes.IdCliente);
@@ -74,21 +76,21 @@ namespace capa_dato
                     comando.Parameters.AddWithValue("@Estado", cE_Clientes.Estado);
                     comando.ExecuteNonQuery();
                 }
-                conexion.cerrar_conexion();
+                
             }
         }
 
-        public void EliminarClientes (int IdCliente)
+        public void EliminarClientes (int Id)
         {
             using (var conexionAbierta = conexion.abrir_conexion())
             {
-                using (var comando = new Microsoft.Data.SqlClient.SqlCommand("SP_Clientes_Delete", conexionAbierta))
+                using (var comando = new SqlCommand("SP_Clientes_Delete", conexionAbierta))
                 {
                     comando.CommandType = System.Data.CommandType.StoredProcedure;
-                    comando.Parameters.AddWithValue("@IdCliente", IdCliente);
+                    comando.Parameters.AddWithValue("@id", Id);
                     comando.ExecuteNonQuery();
                 }
-                conexion.cerrar_conexion();
+                
             }
         }
 

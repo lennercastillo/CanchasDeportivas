@@ -11,84 +11,115 @@ namespace capa_presentacion.Controllers
 {
     public class CanchasController : Controller
     {
-        
-        private readonly CN_Canchas _negocio;
 
-        public CanchasController()
+        CN_Canchas Canchas = new CN_Canchas();
+
+        public ActionResult ListarCanchas()
         {
-            
-            _negocio = new CN_Canchas();
+
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    throw new Exception("El estado del modelo no es válido.");
+                }
+
+                var olista = Canchas.ListarCanchas();
+                return View(olista);
+            }
+
+            catch (Exception ex)
+            {
+
+                TempData["ErrorMessage"] = "Error al obtener la lista de canchas: " + ex.Message;
+                return View(new List<CE_Canchas>());
+            }
+
+
+
         }
 
-        
-        public ActionResult Listar()
-        {
-            var canchas = _negocio.ListarCanchas();
-            return View(canchas);
-        }
 
-        
-        public ActionResult Agregar()
+        public ActionResult AgregarCancha()
         {
             return View();
         }
 
-        
+
         [HttpPost]
-        public ActionResult Agregar(CE_Canchas cancha)
+        public ActionResult AgregarCancha(CE_Canchas cancha)
         {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _negocio.Agregar(cancha);
-                    return RedirectToAction("Listar");
-                }
-                catch (Exception ex)
-                {
-                    
-                    ModelState.AddModelError(string.Empty, "Error al agregar la cancha. Inténtelo de nuevo.");
-                    
-                }
-            }
-
-            return View(cancha); 
-        }
-
-
-        
-        [HttpPost]
-        
-        public ActionResult Eliminar(CE_Canchas cancha) 
-        {
-            
-            if (cancha == null || cancha.IdCancha <= 0)
-            {
-                
-                TempData["ErrorMessage"] = "Información incompleta: El ID de la cancha es requerido para la eliminación.";
-                return RedirectToAction("Listar");
-            }
-
             try
             {
-               
-                _negocio.Eliminar(cancha);
+                if (!ModelState.IsValid) 
+                {
+                    return StatusCode(404, $"No se encontro el modelo");
 
-                TempData["SuccessMessage"] = $"La cancha con ID {cancha.IdCancha} ha sido eliminada exitosamente.";
-                return RedirectToAction("Listar");
+                }
+
+                Canchas.AgregarCancha(cancha);
+                return RedirectToAction("ListarCanchas");
+
             }
-            catch (ArgumentException aex)
-            {
-               
-                TempData["ErrorMessage"] = aex.Message;
-                return RedirectToAction("Listar");
-            }
+
             catch (Exception ex)
             {
-                
-                TempData["ErrorMessage"] = "Ocurrió un error al intentar eliminar la cancha. Detalles: " + ex.Message;
-                return RedirectToAction("Listar");
+                return StatusCode(500, $"Error al agregar la cancha: {ex.Message} ");
             }
         }
-    }
+
+        [HttpGet]
+
+
+
+        public ActionResult Actualizar(int id)
+
+        {
+
+            var lista = Canchas.ListarCanchas();
+            var cancha = lista.FirstOrDefault(c => c.IdCancha == id);
+
+           if (cancha == null)
+            {
+                return NotFound($"no se puedo actualizar la cancha con el id: {id}");
+            }
+            return View(cancha);
+        }
+
+        [HttpPost]
+
+        public ActionResult Actualizar(CE_Canchas cancha)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    Canchas.Actualizar(cancha);
+                    return RedirectToAction("ListarCanchas");
+                }
+                Canchas.Actualizar(cancha);
+                return RedirectToAction("ListarCanchas");
+
+
+
+
+            }
+
+
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error al actualizar la cancha: {ex.Message} ");
+            }
+        }
+
+        [HttpPost]
+
+        public ActionResult Eliminar(int id)
+        {
+            Canchas.Eliminar(id);
+            return RedirectToAction("ListarCanchas");
+        }
+
+        
 }
+    }

@@ -1,0 +1,47 @@
+﻿@model List<capa_entidad.CE_Canchas>
+@{
+    ViewData["Title"] = "Canchas";
+}
+
+<h1>Canchas</h1>
+
+<a asp-action="AgregarCancha" class="btn btn-success mb-3">Agregar Nueva Cancha</a>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>PrecioPorHora</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+
+<tbody>
+    @foreach (var cancha in Model)
+    {
+        <tr>
+            <td>@cancha.IdCancha</td>
+            <td>@cancha.Nombre</td>
+            <td>@cancha.Tipo</td>
+            <td>@cancha.PrecioPorHora</td>
+            <td>@cancha.Estado</td>
+            <th>
+                <a asp-action="Actualizar" asp-route-id="@cancha.IdCancha" class="btn btn-primary">Editar</a>
+                <form asp-action="Eliminar " method="post" asp-route-id="@cancha.IdCancha">
+						<button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar esta cancha?');">Eliminar</button>
+                </form>
+                
+
+            </th>
+        </tr>
+    }
+</tbody>
+</table>
+
+
+
+
+
