@@ -23,12 +23,17 @@ namespace capa_entidad
         public bool Estado { get; set; }
     }
 
-    
+    public class CanchaViewModel
+    {
+        public CE_Canchas Canchas { get; set; }
+        public List<CE_Canchas> ListaCanchas { get; set; }
+    }
 
 
 
 
-   
+
+
 
 
 

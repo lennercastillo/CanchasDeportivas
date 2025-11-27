@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using capa_negocio;
+﻿using System.Reflection;
 using capa_entidad;
+using capa_negocio;
+using capa_presentacion.Models;
+using Microsoft.AspNetCore.Mvc;
 
 
 namespace capa_presentacion.Controllers
@@ -28,21 +30,26 @@ namespace capa_presentacion.Controllers
                 return View(new List<CE_Reservas>());
             }
 
-
-
-
-
-
-
         }
 
         public ActionResult InsertarReservas()
         {
-            return View();
+            // 1. Creas el paquete (el ViewModel)
+            ReservaViewModel modelo = new ReservaViewModel();
+
+            // 2. Le pones la lista de clientes adentro (para que el dropdown funcione)
+            modelo.ListaClientes = new CN_Clientes().Listar();
+            modelo.ListaCanchas = new CN_Canchas().ListarCanchas();
+
+            // 3. Inicializas la reserva (para evitar otros nulos)
+            modelo.Reserva = new CE_Reservas();
+
+            // 4. ¡LA CLAVE! Envías el modelo a la vista
+            return View(modelo);
+            //return View();
         }
-
+        /*
         [HttpPost]
-
         public ActionResult InsertarReservas(CE_Reservas reservas)
         {
             try
@@ -51,6 +58,7 @@ namespace capa_presentacion.Controllers
                 {
                     return StatusCode(404, $"No se encontro el modelo");
                 }
+
                 Reservas.InsertarReservas(reservas);
                 return RedirectToAction("ListarReservas");
             }
@@ -59,13 +67,30 @@ namespace capa_presentacion.Controllers
                 return StatusCode(500, $"Error al agregar la reserva: {ex.Message}");
             }
 
+        }
+        */
+
+        [HttpPost]
+        public ActionResult InsertarReservas(ReservaViewModel reservas)
+        {
+            try
+            {
+                if (reservas.Reserva == null)
+                {
+                    return StatusCode(404, $"No se encontro el modelo");
+                }
+
+                Reservas.InsertarReservas(reservas);
+                return RedirectToAction("ListarReservas");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error al agregar la reserva: {ex.Message}");
+            }
 
         }
 
         [HttpGet]
-
-
-
         public ActionResult Actualizar(int id)
         {
             var oReserva = Reservas.Listar();

@@ -35,9 +35,10 @@ namespace capa_dato
                                 FechaReserva = Convert.ToDateTime(lector["FechaReserva"]),
                                 HoraInicio = (TimeSpan)(lector["HoraInicio"]),
                                 HoraFin = (TimeSpan)(lector["HoraFin"]),
-                                NombreCliente = lector["NombreCliente"].ToString(),
+                                NombreCliente = lector["Nombre"].ToString(),
                                 Comentario = lector["Comentario"].ToString(),
-                                Estado = Convert.ToBoolean(lector["Estado"])
+                                Estado = Convert.ToBoolean(lector["Estado"]),
+                                NombreCancha = lector["NombreCancha"].ToString()
 
                             });
                         }
@@ -50,7 +51,7 @@ namespace capa_dato
 
         }
 
-        public void InsertarReserva(CE_Reservas cE_Reservas)
+        public void InsertarReserva( ReservaViewModel viewModel)
         {
             using (var conexionAbierta = conexion.abrir_conexion())
             {
@@ -60,24 +61,15 @@ namespace capa_dato
 
                     comando.CommandType = System.Data.CommandType.StoredProcedure;
 
-                    comando.Parameters.AddWithValue("@IdCancha", cE_Reservas.IdCancha);
-                    comando.Parameters.AddWithValue("@IdCliente", cE_Reservas.IdCliente);
-                    comando.Parameters.AddWithValue("@IdUsuario", cE_Reservas.IdUsuario);
-                    comando.Parameters.AddWithValue("@FechaReserva", cE_Reservas.FechaReserva);
-                    comando.Parameters.AddWithValue("@HoraInicio", cE_Reservas.HoraInicio);
-                    comando.Parameters.AddWithValue("@HoraFin", cE_Reservas.HoraFin);
-                    comando.Parameters.AddWithValue("@NombreCliente", cE_Reservas.NombreCliente);
-                    comando.Parameters.AddWithValue("@Comentario", cE_Reservas.Comentario);
-                    comando.Parameters.AddWithValue("@Estado", cE_Reservas.Estado);
+                    comando.Parameters.AddWithValue("@IdCancha", viewModel.Reserva.IdCancha);
+                    comando.Parameters.AddWithValue("@IdCliente", viewModel.Reserva.IdCliente);
+                    comando.Parameters.AddWithValue("@IdUsuario", viewModel.Reserva.IdUsuario);
+                    comando.Parameters.AddWithValue("@FechaReserva", viewModel.Reserva.FechaReserva);
+                    comando.Parameters.AddWithValue("@HoraInicio", viewModel.Reserva.HoraInicio);
+                    comando.Parameters.AddWithValue("@HoraFin", viewModel.Reserva.HoraFin);
+          
+                    comando.Parameters.AddWithValue("@Comentario", viewModel.Reserva.Comentario);
                     
-
-
-
-
-                    comando.ExecuteNonQuery();
-
-
-
                     comando.ExecuteNonQuery();
                 }
                 

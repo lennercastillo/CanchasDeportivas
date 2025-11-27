@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using capa_entidad;
-using capa_dato;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using capa_dato;
+using capa_dato;
 using capa_entidad;
-using System.Text.RegularExpressions;
+using capa_entidad;
 
 namespace capa_negocio
 {
@@ -19,8 +20,13 @@ namespace capa_negocio
 
         public List<CE_Clientes> Listar()
         {
-           oCD_Clientes = new CD_Clientes();
-           return oCD_Clientes.ListarClientes();
+            List<CE_Clientes> lista = oCD_Clientes.ListarClientes();
+            //oCD_Clientes = new CD_Clientes();
+            if (lista == null)
+            {
+                return new List<CE_Clientes>();
+            }
+            return lista;
         }
 
         // 2. Insertar Nuevo Cliente

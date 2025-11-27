@@ -28,12 +28,6 @@ namespace capa_presentacion.Controllers
                 return View(new List<CE_Clientes>());
             }
 
-
-
-
-
-
-
         }
 
         public ActionResult InsertarCliente()

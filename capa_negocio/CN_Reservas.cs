@@ -4,6 +4,7 @@ using System.Linq;
 using capa_entidad;
 using capa_dato;
 
+
 namespace capa_negocio
 {
     public class CN_Reservas
@@ -18,8 +19,15 @@ namespace capa_negocio
             return oCD_Reservas.Listar();
         }
 
-        
-        public void InsertarReservas(CE_Reservas reserva)
+
+        //public void InsertarReservas(CE_Reservas reserva)
+        //{
+
+        //    oCD_Reservas.InsertarReserva(reserva);
+
+
+        //}
+        public void InsertarReservas( ReservaViewModel reserva)
         {
 
             oCD_Reservas.InsertarReserva(reserva);
@@ -27,7 +35,6 @@ namespace capa_negocio
 
         }
 
-        
         public void Actualizar(CE_Reservas reserva)
         {
 

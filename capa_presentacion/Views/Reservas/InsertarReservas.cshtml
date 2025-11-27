@@ -1,4 +1,6 @@
-﻿@model capa_entidad.CE_Reservas
+﻿@model capa_entidad.ReservaViewModel
+
+
 @{
     ViewData["Title"] = "AgregarReserva";
 }
@@ -8,94 +10,65 @@
 <form action="InsertarReservas" method="post" class="container">
 
     <section class="mb-3">
-        <label asp-for="IdCancha" class="form-label"></label>
-        <input asp-for="IdCancha" class="form-control" />
-        <span asp-validation-for="IdCancha" class="text-danger"></span>
+        <select asp-for="Reserva.IdCancha">
+            @if (Model.ListaCanchas != null)
+            {
+                foreach (var cancha in Model.ListaCanchas)
+                {
+                    <option value="@cancha.IdCancha">@cancha.Nombre</option>
+                }
+            }
+        </select>
 
     </section>
     <section class="mb-3">
-        <label asp-for="IdCliente" class="form-label"></label>
-        <input asp-for="IdCliente" class="form-control" />
-        <span asp-validation-for="IdCliente" class="text-danger"></span>
+        <select asp-for="Reserva.IdCliente">
+            @if (Model.ListaClientes != null)
+            {
+                foreach (var cliente in Model.ListaClientes)
+                {
+                    <option value="@cliente.IdCliente">@cliente.Nombre</option>
+                }
+            }
+        </select>
 
     </section>
     <section class="mb-3">
-        <label asp-for="IdUsuario" class="form-label"></label>
-        <input asp-for="IdUsuario" class="form-control" />
-        <span asp-validation-for="IdUsuario" class="text-danger"></span>
+        <label asp-for="Reserva.IdUsuario" class="form-label"></label>
+        <input asp-for="Reserva.IdUsuario"  value = "1" class="form-control" readonly />
+        <span asp-validation-for="Reserva.IdUsuario" class="text-danger"></span>
+
+    </section> 
+    <section class="mb-3">
+        <label asp-for="Reserva.FechaReserva" class="form-label"></label>
+        <input type="date" asp-for="Reserva.FechaReserva" value = "@DateTime.Now.ToString("dd/MM/yyyy")" class="form-control" />
+        <span asp-validation-for="Reserva.FechaReserva" class="text-danger"></span>
 
     </section>
     <section class="mb-3">
-        <label asp-for="FechaReserva" class="form-label"></label>
-        <input type="datetime-local" asp-for="FechaReserva" class="form-control" />
-        <span asp-validation-for="FechaReserva" class="text-danger"></span>
+        <label asp-for="Reserva.HoraInicio" class="form-label"></label>
+        <input type="time" asp-for="Reserva.HoraInicio" class="form-control" />
+        <span asp-validation-for="Reserva.HoraInicio" class="text-danger"></span>
 
     </section>
     <section class="mb-3">
-        <label asp-for="HoraInicio" class="form-label"></label>
-        <input type="time" asp-for="HoraInicio" class="form-control" />
-        <span asp-validation-for="HoraInicio" class="text-danger"></span>
+        <label asp-for="Reserva.HoraFin" class="form-label"></label>
+        <input type="time" asp-for="Reserva.HoraFin" class="form-control" />
+        <span asp-validation-for="Reserva.HoraFin" class="text-danger"></span>
 
     </section>
+    
     <section class="mb-3">
-        <label asp-for="HoraFin" class="form-label"></label>
-        <input type="time" asp-for="HoraFin" class="form-control" />
-        <span asp-validation-for="HoraFin" class="text-danger"></span>
-
-    </section>
-    <section class="mb-3">
-        <label asp-for="NombreCliente" class="form-label"></label>
-        <input asp-for="NombreCliente" class="form-control" />
-        <span asp-validation-for="NombreCliente" class="text-danger"></span>
-
-    </section>
-    <section class="mb-3">
-        <label asp-for="Comentario" class="form-label"></label>
-        <input asp-for="Comentario" class="form-control" />
-        <span asp-validation-for="Comentario" class="text-danger"></span>
+        <label asp-for="Reserva.Comentario" class="form-label"></label>
+        <input asp-for="Reserva.Comentario" class="form-control" />
+        <span asp-validation-for="Reserva.Comentario" class="text-danger"></span>
 
     </section>
 
-    <div>
-        <section class="mb-3">
-            <label asp-for="Estado" class="col-form-label"></label>
-            <input asp-for="Estado" class="form-check-input" />
-            <span asp-validation-for="Estado" class="text-danger"></span>
-        </section>
-    </div>
-
-
-
+ 
 
     <button type="submit" class="btn btn-primary">Agregar</button>
     <a asp-action="ListarClientes" class="btn btn-secondary">Cancelar</a>
 
 </form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

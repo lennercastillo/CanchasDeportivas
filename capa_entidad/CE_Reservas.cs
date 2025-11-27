@@ -21,8 +21,21 @@ namespace capa_entidad
         public TimeSpan HoraFin { get; set; }
         public string? NombreCliente { get; set; }
 
+        public String? NombreCancha { get; set; }
+
         public string? Comentario { get; set; }
 
         public bool Estado { get; set; }
     }
+
+    public class ReservaViewModel
+    {
+        public CE_Reservas Reserva { get; set; }
+        public List<CE_Clientes> ListaClientes { get; set; }
+
+        public List<CE_Canchas> ListaCanchas { get; set; }
+    }
+
+    
+
 }

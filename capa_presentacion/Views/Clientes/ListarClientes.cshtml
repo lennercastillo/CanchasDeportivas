@@ -11,9 +11,9 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Id</th>
+            <th>Cod.</th>
             <th>Nombre</th>
-            <th>Telefono</th>
+            <th>Teléfono</th>
             <th>Correo</th>
             <th>Estado</th>
         </tr>
@@ -27,7 +27,7 @@
                 <td>@cliente.Nombre</td>
                 <td>@cliente.Telefono</td>
                 <td>@cliente.Correo</td>
-                <td>@cliente.Estado</td>
+                <td>@cliente.Estado.ToString().Replace("True", "Activo").Replace("False","Inactivo")</td>
                 <th>
                     <a asp-action="Actualizar" asp-route-id="@cliente.IdCliente" class="btn btn-primary">Editar</a>
                     <form asp-action="Eliminar" method="post" asp-route-id="@cliente.IdCliente">
