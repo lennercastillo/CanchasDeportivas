@@ -26,6 +26,8 @@ namespace capa_entidad
         public string? Comentario { get; set; }
 
         public bool Estado { get; set; }
+
+        
     }
 
     public class ReservaViewModel

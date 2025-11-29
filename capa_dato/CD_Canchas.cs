@@ -59,7 +59,7 @@ namespace capa_dato
                     comando.Parameters.AddWithValue("@Nombre", cE_Canchas.Nombre);
                     comando.Parameters.AddWithValue("@Tipo", cE_Canchas.Tipo);
                     comando.Parameters.AddWithValue("@PrecioPorHora", cE_Canchas.PrecioPorHora);
-                    comando.Parameters.AddWithValue("@Estado", cE_Canchas.Estado);
+                    
                     comando.ExecuteNonQuery();
                 }
                 
@@ -95,7 +95,7 @@ namespace capa_dato
                     comando.Parameters.AddWithValue("@Nombre", cE_Canchas.Nombre);
                     comando.Parameters.AddWithValue("@Tipo", cE_Canchas.Tipo);
                     comando.Parameters.AddWithValue("@PrecioPorHora", cE_Canchas.PrecioPorHora);
-                    comando.Parameters.AddWithValue("@Estado", cE_Canchas.Estado);
+                   
                     comando.ExecuteNonQuery();
                 }
                 

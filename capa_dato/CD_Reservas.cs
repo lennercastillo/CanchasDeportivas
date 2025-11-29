@@ -51,6 +51,49 @@ namespace capa_dato
 
         }
 
+        //FILTRAR RESERVAS
+
+        public List<CE_Reservas> ListarNombre(string BuscarNombreReserva)
+        {
+            var ListarReserva = new List<CE_Reservas>();
+
+            using (var conexionAbierta = conexion.abrir_conexion())
+            {
+                using (var comando = new SqlCommand("SP_Listar_Reservas_Nombre", conexionAbierta))
+                {
+                    comando.CommandType = System.Data.CommandType.StoredProcedure;
+                    comando.Parameters.Add(new SqlParameter("@Buscar", BuscarNombreReserva));
+                    using (var lector = comando.ExecuteReader())
+                    {
+                        while (lector.Read())
+                        {
+                            ListarReserva.Add(new CE_Reservas
+                            {
+                                IdReserva = Convert.ToInt32(lector["IdReserva"]),
+                                IdCancha = Convert.ToInt32(lector["IdCancha"]),
+                                IdCliente = Convert.ToInt32(lector["IdCliente"]),
+                                IdUsuario = Convert.ToInt32(lector["IdUsuario"]),
+                                FechaReserva = Convert.ToDateTime(lector["FechaReserva"]),
+                                HoraInicio = (TimeSpan)(lector["HoraInicio"]),
+                                HoraFin = (TimeSpan)(lector["HoraFin"]),
+                                NombreCliente = lector["NombreCliente"].ToString(),
+                                Comentario = lector["Comentario"].ToString(),
+                                Estado = Convert.ToBoolean(lector["Estado"]),
+                                NombreCancha = lector["NombreCancha"].ToString(),
+                               
+                                
+
+                            });
+                        }
+                    }
+                }
+                
+                return ListarReserva;
+            }
+
+
+        }
+
         public void InsertarReserva( ReservaViewModel viewModel)
         {
             using (var conexionAbierta = conexion.abrir_conexion())

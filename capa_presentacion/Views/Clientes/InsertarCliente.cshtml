@@ -3,69 +3,68 @@
     ViewData["Title"] = "AgregarCliente";
 }
 
-<h1>Agregar nuevo Cliente</h1>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
 
-<form action="InsertarClientes" method="post" class="container">
+            <div class="card shadow border-0">
+                <div class="card-header bg-primary text-white text-center py-3">
+                    <h3 class="card-title mb-0">
+                        <i class="bi bi-person-plus-fill me-2"></i>Agregar nuevo Cliente
+                    </h3>
+                </div>
 
-    <section class="mb-3">
-        <label asp-for="Nombre" class="form-label"></label>
-        <input asp-for="Nombre" class="form-control" />
-        <span asp-validation-for="Nombre" class="text-danger"></span>
+                <div class="card-body p-4">
+                    <form action="InsertarClientes" method="post">
 
-    </section>
-    <section class="mb-3">
-        <label asp-for="Telefono" class="form-label"></label>
-        <input asp-for="Telefono" class="form-control" />
-        <span asp-validation-for="Telefono" class="text-danger"></span>
+                        <div class="mb-3">
+                            <label asp-for="Nombre" class="form-label fw-bold">Nombre Completo</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                <input asp-for="Nombre" class="form-control" placeholder="Ej. Juan Pérez" />
+                            </div>
+                            <span asp-validation-for="Nombre" class="text-danger small"></span>
+                        </div>
 
-    </section>
-    <section class="mb-3">
-        <label asp-for="Correo" class="form-label"></label>
-        <input asp-for="Correo" class="form-control" />
-        <span asp-validation-for="Correo" class="text-danger"></span>
+                        <div class="mb-3">
+                            <label asp-for="Telefono" class="form-label fw-bold">Teléfono</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-telephone"></i></span>
+                                <input asp-for="Telefono" class="form-control" placeholder="Ej. 8888-8888" />
+                            </div>
+                            <span asp-validation-for="Telefono" class="text-danger small"></span>
+                        </div>
 
-    </section>
+                        <div class="mb-3">
+                            <label asp-for="Correo" class="form-label fw-bold">Correo Electrónico</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                <input asp-for="Correo" class="form-control" placeholder="ejemplo@correo.com" />
+                            </div>
+                            <span asp-validation-for="Correo" class="text-danger small"></span>
+                        </div>
 
-    <div>
-        <section class="mb-3">
-            <label asp-for="Estado" class="col-form-label"></label>
-            <input asp-for="Estado" class="col-form-label" />
-            <span asp-validation-for="Estado" class="text-danger"></span>
-        </section>
+                        <div class="mb-4">
+                            <label asp-for="Estado" class="form-label fw-bold">Estado</label>
+                            <input asp-for="Estado" class="form-control" placeholder="Activo" />
+                            <span asp-validation-for="Estado" class="text-danger small"></span>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a asp-controller="Reservas" asp-action="InsertarReservas" class="btn btn-secondary me-md-2">
+                                <i class="bi bi-x-circle"></i> Seguir con la reserva
+                            </a>
+                            <a asp-action="ListarClientes" class="btn btn-secondary me-md-2">
+                                <i class="bi bi-x-circle"></i> Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-circle"></i> Agregar
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-
-
-
-
-    <button type="submit" class="btn btn-primary">Agregar</button>
-    <a asp-action="ListarClientes" class="btn btn-secondary">Cancelar</a>
-
-</form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</div>

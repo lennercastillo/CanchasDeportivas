@@ -47,5 +47,12 @@ namespace capa_negocio
            oCD_Reservas.EliminarReserva(id);
 
         }
+
+        //metodo filtrar por nombre
+
+        public List<CE_Reservas> ListarNombre(string BuscarNombreReserva) 
+        {
+            return oCD_Reservas.ListarNombre(BuscarNombreReserva);
+        }
     }
 }

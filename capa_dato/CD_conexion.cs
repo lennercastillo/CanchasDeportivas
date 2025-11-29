@@ -10,7 +10,7 @@ namespace capa_dato
     public class CD_conexion
     {
 
-        private readonly SqlConnection conexion = new SqlConnection("Data Source=DESKTOP-ACAM5N1;Initial Catalog=DB_canchasdeportivas;Integrated Security=True;Trust Server Certificate=True");
+        private readonly SqlConnection conexion = new SqlConnection("Data Source=JONATHANCASTILL\\SQLEXPRESS;Initial Catalog=DB_canchasdeportivas;Integrated Security=True;Encrypt=True;Trust Server Certificate=True");
 
         public SqlConnection abrir_conexion()
         {

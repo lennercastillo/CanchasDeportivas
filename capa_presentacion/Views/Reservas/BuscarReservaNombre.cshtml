@@ -1,5 +1,5 @@
-﻿@using capa_entidad
-@model List<CE_Reservas>
+﻿
+@model List<capa_entidad.CE_Reservas>
 
 @{
     ViewData["Title"] = "Gestión de Reservas";
@@ -13,7 +13,7 @@
             <h3 class="card-title mb-0 h5">
                 <i class="bi bi-calendar-range me-2"></i>Gestión de Reservas
             </h3>
-            <a asp-action="InsertarReservas" class="btn btn-light text-primary fw-bold btn-sm">
+            <a asp-action="InsertarReservas" class="btn btn-light text-primary fw-bold btn-sm shadow-sm">
                 <i class="bi bi-plus-lg"></i> Nueva Reserva
             </a>
         </div>
@@ -21,15 +21,16 @@
         <div class="card-body p-4">
 
             <div class="row mb-4">
-                <div class="col-md-6">
+                <div class="col-md-8 col-lg-6">
                     <form asp-controller="Reservas" asp-action="BuscarReservaNombre" method="post">
                         <div class="input-group">
                             <span class="input-group-text bg-light border-end-0">
                                 <i class="bi bi-search text-muted"></i>
                             </span>
+
                             <input type="text"
                                    name="BuscarReservaNombre"
-                                   class="form-control border-start-0"
+                                   class="form-control border-start-0 bg-light"
                                    placeholder="Buscar por nombre de cliente..."
                                    required />
 
@@ -38,7 +39,7 @@
                             <a asp-action="ListarReservas" class="btn btn-outline-secondary" title="Ver todos">
                                 <i class="bi bi-arrow-counterclockwise"></i>
                             </a>
-                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -47,7 +48,7 @@
                 @if (Model != null && Model.Any())
                 {
                     <table class="table table-hover table-bordered align-middle">
-                        <thead class="table-light">
+                        <thead class="table-light text-uppercase small text-muted">
                             <tr>
                                 <th>Cod.</th>
                                 <th>Cancha</th>
@@ -64,39 +65,42 @@
                             @foreach (var reserva in Model)
                             {
                                 <tr>
-                                    <td class="fw-bold">@reserva.IdReserva</td>
+                                    <td class="fw-bold text-secondary">#@reserva.IdReserva</td>
 
                                     <td>
-                                        <span class="badge bg-info text-dark">
-                                            <i class="bi bi-trophy me-1"></i>@reserva.NombreCancha
+                                        <span class="badge bg-info bg-opacity-10 text-primary border border-info">
+                                            <i class="bi bi-trophy-fill me-1"></i>@reserva.NombreCancha
                                         </span>
                                     </td>
 
                                     <td>
                                         <div class="d-flex flex-column">
-                                            <span>@reserva.FechaReserva.ToShortDateString()</span>
+                                            <span class="fw-bold">@reserva.FechaReserva.ToShortDateString()</span>
                                         </div>
                                     </td>
 
-                                    <td class="text-center">@reserva.HoraInicio</td>
-                                    <td class="text-center">@reserva.HoraFin</td>
+                                    <td class="text-center font-monospace small">@reserva.HoraInicio</td>
+                                    <td class="text-center font-monospace small">@reserva.HoraFin</td>
 
                                     <td>
-                                        <i class="bi bi-person text-muted me-1"></i>@reserva.NombreCliente
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-person-circle text-secondary me-2 fs-5"></i>
+                                            <span class="fw-semibold">@reserva.NombreCliente</span>
+                                        </div>
                                     </td>
 
-                                    <td class="text-muted small fst-italic text-truncate" style="max-width: 150px;">
+                                    <td class="text-muted small fst-italic text-truncate" style="max-width: 180px;" title="@reserva.Comentario">
                                         @reserva.Comentario
                                     </td>
 
                                     <td class="text-center">
-                                        <div class="btn-group" role="group">
+                                        <div class="btn-group shadow-sm" role="group">
                                             <a asp-action="Actualizar" asp-route-id="@reserva.IdReserva" class="btn btn-warning btn-sm text-white" title="Editar">
                                                 <i class="bi bi-pencil-square"></i>
                                             </a>
 
-                                            <form asp-action="Eliminar" method="post" asp-route-id="@reserva.IdReserva" class="d-inline">
-                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar la reserva #@reserva.IdReserva?');" title="Eliminar">
+                                            <form asp-action="Eliminar" method="post" asp-route-id="@reserva.IdReserva" class="d-inline" onsubmit="return confirm('¿Estás seguro de que deseas eliminar la reserva #@reserva.IdReserva?');">
+                                                <button type="submit" class="btn btn-danger btn-sm" title="Eliminar" style="border-top-left-radius: 0; border-bottom-left-radius: 0;">
                                                     <i class="bi bi-trash"></i>
                                                 </button>
                                             </form>
@@ -109,10 +113,11 @@
                 }
                 else
                 {
-                    <div class="alert alert-warning text-center mt-3" role="alert">
-                        <i class="bi bi-exclamation-triangle me-2"></i>
-                        No se encontraron reservas con ese nombre.
-                        <a asp-action="Index" class="alert-link">Ver todas las reservas</a>.
+                    <div class="alert alert-warning text-center mt-4 p-4" role="alert">
+                        <div class="fs-1 text-warning mb-2"><i class="bi bi-exclamation-circle"></i></div>
+                        <h5>No se encontraron resultados</h5>
+                        <p class="mb-0">No hay reservas que coincidan con la búsqueda.</p>
+                        <a asp-action="ListarReservas" class="btn btn-sm btn-outline-dark mt-3">Ver todas las reservas</a>
                     </div>
                 }
             </div>

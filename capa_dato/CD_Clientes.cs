@@ -55,7 +55,7 @@ namespace capa_dato
                     comando.Parameters.AddWithValue("@Nombre", cE_Clientes.Nombre);
                     comando.Parameters.AddWithValue("@Telefono", cE_Clientes.Telefono);
                     comando.Parameters.AddWithValue("@Correo", cE_Clientes.Correo);
-                    comando.Parameters.AddWithValue("@Estado", cE_Clientes.Estado);
+                    
                     comando.ExecuteNonQuery();
                 }
                 

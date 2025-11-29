@@ -1,74 +1,118 @@
 ﻿@model capa_entidad.ReservaViewModel
 
-
 @{
     ViewData["Title"] = "AgregarReserva";
 }
 
-<h1>Agregar nueva reserva</h1>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
 
-<form action="InsertarReservas" method="post" class="container">
+            <div class="card shadow border-0">
+                <div class="card-header bg-primary text-white text-center py-3">
+                    <h3 class="card-title mb-0">
+                        <i class="bi bi-calendar-plus me-2"></i>Agregar Nueva Reserva
+                    </h3>
+                </div>
 
-    <section class="mb-3">
-        <select asp-for="Reserva.IdCancha">
-            @if (Model.ListaCanchas != null)
-            {
-                foreach (var cancha in Model.ListaCanchas)
-                {
-                    <option value="@cancha.IdCancha">@cancha.Nombre</option>
-                }
-            }
-        </select>
+                <div class="card-body p-4">
+                    <form action="InsertarReservas" method="post">
 
-    </section>
-    <section class="mb-3">
-        <select asp-for="Reserva.IdCliente">
-            @if (Model.ListaClientes != null)
-            {
-                foreach (var cliente in Model.ListaClientes)
-                {
-                    <option value="@cliente.IdCliente">@cliente.Nombre</option>
-                }
-            }
-        </select>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Reserva.IdCancha" class="form-label fw-bold">Cancha</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-trophy"></i></span>
+                                    <select asp-for="Reserva.IdCancha" class="form-select">
+                                        <option value="">-- Seleccione una Cancha --</option>
+                                        @if (Model.ListaCanchas != null)
+                                        {
+                                            foreach (var cancha in Model.ListaCanchas)
+                                            {
+                                                <option value="@cancha.IdCancha">@cancha.Nombre</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
 
-    </section>
-    <section class="mb-3">
-        <label asp-for="Reserva.IdUsuario" class="form-label"></label>
-        <input asp-for="Reserva.IdUsuario"  value = "1" class="form-control" readonly />
-        <span asp-validation-for="Reserva.IdUsuario" class="text-danger"></span>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Reserva.IdCliente" class="form-label fw-bold">Cliente</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                    <select asp-for="Reserva.IdCliente" class="form-select">
+                                        <option value="">-- Seleccione un Cliente --</option>
+                                        @if (Model.ListaClientes != null)
+                                        {
+                                            foreach (var cliente in Model.ListaClientes)
+                                            {
+                                                <option value="@cliente.IdCliente">@cliente.Nombre</option>
+                                            }
+                                        }
+                                    </select>
+                                    <a asp-controller = "Clientes" asp-action="InsertarCliente" class="btn btn-light text-primary fw-bold">
+                                        <i class="bi bi-person-plus-fill"></i> Nuevo Cliente
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
 
-    </section> 
-    <section class="mb-3">
-        <label asp-for="Reserva.FechaReserva" class="form-label"></label>
-        <input type="date" asp-for="Reserva.FechaReserva" value = "@DateTime.Now.ToString("dd/MM/yyyy")" class="form-control" />
-        <span asp-validation-for="Reserva.FechaReserva" class="text-danger"></span>
+                        <div class="mb-3">
+                            <label asp-for="Reserva.IdUsuario" class="form-label fw-bold">Usuario (Operador)</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-person-badge-fill"></i></span>
+                                <input asp-for="Reserva.IdUsuario" value="1" class="form-control" readonly style="background-color: #e9ecef;" />
+                            </div>
+                            <span asp-validation-for="Reserva.IdUsuario" class="text-danger small"></span>
+                        </div>
 
-    </section>
-    <section class="mb-3">
-        <label asp-for="Reserva.HoraInicio" class="form-label"></label>
-        <input type="time" asp-for="Reserva.HoraInicio" class="form-control" />
-        <span asp-validation-for="Reserva.HoraInicio" class="text-danger"></span>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label asp-for="Reserva.FechaReserva" class="form-label fw-bold">Fecha</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-calendar-event"></i></span>
+                                    <input type="date" asp-for="Reserva.FechaReserva" value="@DateTime.Now.ToString("dd/MM/yyyy")" class="form-control" />
+                                </div>
+                                <span asp-validation-for="Reserva.FechaReserva" class="text-danger small"></span>
+                            </div>
 
-    </section>
-    <section class="mb-3">
-        <label asp-for="Reserva.HoraFin" class="form-label"></label>
-        <input type="time" asp-for="Reserva.HoraFin" class="form-control" />
-        <span asp-validation-for="Reserva.HoraFin" class="text-danger"></span>
+                            <div class="col-md-4 mb-3">
+                                <label asp-for="Reserva.HoraInicio" class="form-label fw-bold">Hora Inicio</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-clock"></i></span>
+                                    <input type="time" asp-for="Reserva.HoraInicio" class="form-control" />
+                                </div>
+                                <span asp-validation-for="Reserva.HoraInicio" class="text-danger small"></span>
+                            </div>
 
-    </section>
-    
-    <section class="mb-3">
-        <label asp-for="Reserva.Comentario" class="form-label"></label>
-        <input asp-for="Reserva.Comentario" class="form-control" />
-        <span asp-validation-for="Reserva.Comentario" class="text-danger"></span>
+                            <div class="col-md-4 mb-3">
+                                <label asp-for="Reserva.HoraFin" class="form-label fw-bold">Hora Fin</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-clock-fill"></i></span>
+                                    <input type="time" asp-for="Reserva.HoraFin" class="form-control" />
+                                </div>
+                                <span asp-validation-for="Reserva.HoraFin" class="text-danger small"></span>
+                            </div>
+                        </div>
 
-    </section>
+                        <div class="mb-4">
+                            <label asp-for="Reserva.Comentario" class="form-label fw-bold">Comentarios</label>
+                            <textarea asp-for="Reserva.Comentario" class="form-control" rows="2" placeholder="Notas sobre la reserva..."></textarea>
+                            <span asp-validation-for="Reserva.Comentario" class="text-danger small"></span>
+                        </div>
 
- 
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a asp-action="ListarReservas" class="btn btn-secondary me-md-2">
+                                <i class="bi bi-x-circle"></i> Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-circle"></i> Agregar Reserva
+                            </button>
+                        </div>
 
-    <button type="submit" class="btn btn-primary">Agregar</button>
-    <a asp-action="ListarClientes" class="btn btn-secondary">Cancelar</a>
-
-</form>
-
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -3,39 +3,59 @@
     ViewData["Title"] = "AgregarCancha";
 }
 
-<h1>Insertar nueva cancha</h1>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
 
-<form action="AgregarCancha" method="post" class="container">
+            <div class="card shadow border-0">
+                <div class="card-header bg-primary text-white text-center py-3">
+                    <h3 class="card-title mb-0">
+                        <i class="bi bi-plus-circle me-2"></i>Insertar nueva cancha
+                    </h3>
+                </div>
 
-    <section class="mb-3">
-        <label asp-for="Nombre" class="form-label"></label>
-        <input asp-for="Nombre" class="form-control" />
-        <span asp-validation-for="Nombre" class="text-danger"></span>
-    </section>
-    <section class="mb-3">
-		<label asp-for="Tipo" class="form-label>"></label>
-		<input asp-for="Tipo" class="form-control" />
-        <span asp-validation-for="Tipo" class="text-danger"></span>
-        </section>
-    <section class="mb-3">
-        <label asp-for="PrecioPorHora" class="form-label"></label>
-        <input asp-for="PrecioPorHora" class="form-control" />
-		<span asp-validation-for="PrecioPorHora" class="text-danger"></span>
-    </section>
-    <section class="mb-3">
-        <label asp-for="Estado" class="form-label"></label>
-		<input asp-for="Estado" class="form-control" />
-        <span asp-validation-for="Estado" class="text-danger"></span>
-    </section>
+                <div class="card-body p-4">
+                    <form action="AgregarCancha" method="post">
 
-    <button type="submit" class="btn btn-primary">Agregar</button>
-	<a asp-action="ListarCanchas" class="btn btn-secondary">Cancelar</a>
-        
+                        <div class="mb-3">
+                            <label asp-for="Nombre" class="form-label fw-bold">Nombre</label>
+                            <input asp-for="Nombre" class="form-control" placeholder="Ej. Cancha Norte" />
+                            <span asp-validation-for="Nombre" class="text-danger small"></span>
+                        </div>
 
+                        <div class="mb-3">
+                            <label asp-for="Tipo" class="form-label fw-bold">Tipo</label>
+                            <input asp-for="Tipo" class="form-control" placeholder="Ej. Sintética" />
+                            <span asp-validation-for="Tipo" class="text-danger small"></span>
+                        </div>
 
-    
+                        <div class="mb-3">
+                            <label asp-for="PrecioPorHora" class="form-label fw-bold">Precio por Hora</label>
+                            <div class="input-group">
+                                <span class="input-group-text">$</span>
+                                <input asp-for="PrecioPorHora" class="form-control" placeholder="0.00" />
+                            </div>
+                            <span asp-validation-for="PrecioPorHora" class="text-danger small"></span>
+                        </div>
 
-</form>
+                        <div class="mb-4">
+                            <label asp-for="Estado" class="form-label fw-bold">Estado</label>
+                            <input asp-for="Estado" class="form-control" placeholder="Activa / Inactiva" />
+                            <span asp-validation-for="Estado" class="text-danger small"></span>
+                        </div>
 
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a asp-action="ListarCanchas" class="btn btn-secondary me-md-2">
+                                <i class="bi bi-x-circle"></i> Cancelar
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-circle"></i> Agregar
+                            </button>
+                        </div>
 
-
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -143,6 +143,29 @@ namespace capa_presentacion.Controllers
                 return StatusCode(500, $"Error al eliminar la reserva: {ex.Message}");
             }
         }
+        [HttpGet]
+        public ActionResult BuscarReservaNombre() 
+        {
+            return View();
+
+        }
+
+        [HttpPost]
+
+        public ActionResult BuscarReservaNombre(string BuscarReservaNombre) 
+        {
+            if (string.IsNullOrEmpty(BuscarReservaNombre)) 
+            {
+                var olis = Reservas.Listar();
+                return View(olis);
+            }
+
+            var filtro = Reservas.ListarNombre(BuscarReservaNombre);
+            return View(filtro);
+
+            
+        
+        }
 
 
 

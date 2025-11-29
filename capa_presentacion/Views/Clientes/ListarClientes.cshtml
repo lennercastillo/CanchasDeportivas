@@ -3,41 +3,88 @@
     ViewData["Title"] = "ListarClientes";
 }
 
-<h1>Lista de clientes</h1>
+<div class="container mt-5">
 
-<a asp-action="InsertarCliente" class="btn btn-success mb-3">Agregar Nuevo Cliente</a>
+    <div class="card shadow border-0">
 
+        <div class="card-header bg-primary text-white py-3 d-flex justify-content-between align-items-center">
+            <h3 class="card-title mb-0">
+                <i class="bi bi-people-fill me-2"></i>Lista de Clientes
+            </h3>
+            <a asp-action="InsertarCliente" class="btn btn-light text-primary fw-bold">
+                <i class="bi bi-person-plus-fill"></i> Nuevo Cliente
+            </a>
+        </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Cod.</th>
-            <th>Nombre</th>
-            <th>Teléfono</th>
-            <th>Correo</th>
-            <th>Estado</th>
-        </tr>
-    </thead>
+        <div class="card-body p-4">
 
-    <tbody>
-        @foreach (var cliente in Model)
-        {
-            <tr>
-                <td>@cliente.IdCliente</td>
-                <td>@cliente.Nombre</td>
-                <td>@cliente.Telefono</td>
-                <td>@cliente.Correo</td>
-                <td>@cliente.Estado.ToString().Replace("True", "Activo").Replace("False","Inactivo")</td>
-                <th>
-                    <a asp-action="Actualizar" asp-route-id="@cliente.IdCliente" class="btn btn-primary">Editar</a>
-                    <form asp-action="Eliminar" method="post" asp-route-id="@cliente.IdCliente">
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este cliente?');">Eliminar</button>
-                    </form>
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Cod.</th>
+                            <th>Nombre</th>
+                            <th>Teléfono</th>
+                            <th>Correo</th>
+                            <th class="text-center">Estado</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
 
+                    <tbody>
+                        @foreach (var cliente in Model)
+                        {
+                            <tr>
+                                <td class="fw-bold">@cliente.IdCliente</td>
+                                <td>
+                                    <i class="bi bi-person-circle text-muted me-2"></i>@cliente.Nombre
+                                </td>
+                                <td>@cliente.Telefono</td>
+                                <td>@cliente.Correo</td>
 
-                </th>
-            </tr>
-        }
-    </tbody>
-</table>
+                                <td class="text-center">
+                                    @{
+                                        // Lógica para detectar si está activo (Funciona con True/False o Activo/Inactivo)
+                                        var estadoStr = cliente.Estado.ToString() ?? "";
+                                        bool esActivo = estadoStr.Contains("True") || estadoStr.Contains("Activo");
+                                    }
 
+                                    @if (esActivo)
+                                    {
+                                        <span class="badge bg-success rounded-pill">Activo</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger rounded-pill">Inactivo</span>
+                                    }
+                                </td>
+
+                                <td class="text-center">
+                                    <div class="d-flex justify-content-center gap-2">
+                                        <a asp-action="Actualizar" asp-route-id="@cliente.IdCliente" class="btn btn-warning btn-sm text-white" title="Editar">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
+
+                                        <form asp-action="Eliminar" method="post" asp-route-id="@cliente.IdCliente" class="d-inline">
+                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar al cliente @cliente.Nombre?');" title="Eliminar">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            @if (Model.Count == 0)
+            {
+                <div class="alert alert-info text-center mt-3">
+                    <i class="bi bi-info-circle me-2"></i>No hay clientes registrados en el sistema.
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
